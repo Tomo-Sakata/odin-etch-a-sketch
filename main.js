@@ -1,9 +1,10 @@
 "use strict";
 
-//create default square 
+//default square 
 const container = document.querySelector(".container");
 createGrid(16);
 
+//create square
 function createGrid(size) {
   for(let i = 0; i < size * size; i++){
     const square = document.createElement("div");
@@ -20,9 +21,18 @@ function mouseoverEvent() {
   const squareDivs = document.querySelectorAll(".square");
   squareDivs.forEach(function (squareDiv){
   squareDiv.addEventListener("mouseover",function () {
-  squareDiv.style.backgroundColor = "red";
+  squareDiv.style.backgroundColor = randomeColors();
   })
 });
+}
+
+//randome colors
+function randomeColors() {
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+  const rgb = `rgb(${red}, ${green}, ${blue})`;
+  return rgb;
 }
 
 //create newgrid by user input 
@@ -37,3 +47,4 @@ newGridDiv.addEventListener("click", function(){
   else {alert("enter 1-100");
   }
 });
+

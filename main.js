@@ -2,18 +2,17 @@
 
 //create default square 
 const container = document.querySelector(".container");
-for(let i = 0; i < 256; i++){
-  const squareDiv = createSquareDiv();
-  squareDiv.style.width = (parseInt(getComputedStyle(container).width) / 16) + "px";
-  squareDiv.style.height = (parseInt(getComputedStyle(container).height) / 16) + "px";
-}
-mouseoverEvent();
+createGrid(16);
 
-function createSquareDiv() {
-const square = document.createElement("div");
-square.classList.add("square");
-container.appendChild(square);
-return square;
+function createGrid(size) {
+  for(let i = 0; i < size * size; i++){
+    const square = document.createElement("div");
+    square.classList.add("square");
+    container.appendChild(square);
+    square.style.width = (parseInt(getComputedStyle(container).width) / size) + "px";
+    square.style.height = (parseInt(getComputedStyle(container).height) / size) + "px";
+  }
+  mouseoverEvent();
 }
 
 // mouseover event
@@ -30,16 +29,11 @@ function mouseoverEvent() {
 const newGridDiv = document.querySelector(".newgrid");
 newGridDiv.addEventListener("click", function(){
   const userInput = prompt("You can set the grid size. You can enter up to 100.");
-  const userInputNumber = parseInt(userInput);
+  const userInputNumber = parseInt(userInput);  
   if(userInputNumber >= 1 && userInputNumber <= 100){
   container.innerHTML = "";
-    for(let i = 0; i < userInputNumber * userInputNumber; i++){
-      const newSquareDiv = createSquareDiv();
-      newSquareDiv.style.width = (parseInt(getComputedStyle(container).width) / userInputNumber) + "px";
-      newSquareDiv.style.height = (parseInt(getComputedStyle(container).height) / userInputNumber) + "px";
-    }
+  createGrid(userInputNumber);
   }
   else {alert("enter 1-100");
   }
-  mouseoverEvent();
-  });
+});
